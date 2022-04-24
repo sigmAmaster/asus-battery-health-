@@ -14,6 +14,13 @@ dialog --title "Welcome to Asus Battery Health"\
 function rewrite(){
     if [ $1 == "off" ];
     then
+
+          $(echo "100" > $2)
+          
+          systemctl daemon-reload
+          systemctl enable battery-charge-threshold.service
+          systemctl restart battery-charge-threshold.service
+
           $(sudo rm $3 $2)
 
           systemctl disable battery-charge-threshold.service
